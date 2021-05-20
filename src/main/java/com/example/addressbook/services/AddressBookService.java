@@ -8,37 +8,38 @@ import com.example.addressbook.model.AddressBookData;
 
 public class AddressBookService implements IAddressBookService{
 
+	private List<AddressBookData> addressBookList = new ArrayList<>();
+	
 	@Override
 	public List<AddressBookData> getAddressBookData() {
-		List<AddressBookData> addressBookList = new ArrayList<>();
-		addressBookList.add(new AddressBookData(1, new AddressBookDTO("Akil", "DS", "8098075050")));
 		return addressBookList;
 	}
 
 	@Override
 	public AddressBookData getAddressBookDataById(int id) {
-		AddressBookData addressBookData = null;
-		addressBookData = new AddressBookData(id, new AddressBookDTO("Akil", "DS", "8098075050"));
-		return addressBookData;
+		return addressBookList.get(id-1);
 	}
 
 	@Override
 	public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO) {
 		AddressBookData addressBookData = null;
-		addressBookData = new AddressBookData(1, addressBookDTO);
+		addressBookData = new AddressBookData(addressBookList.size()+1, addressBookDTO);
+		addressBookList.add(addressBookData);
 		return addressBookData;
 	}
 
 	@Override
 	public AddressBookData updateAddressBookData(int id, AddressBookDTO addressBookDTO) {
-		AddressBookData addressBookData = null;
-		addressBookData = new AddressBookData(id, addressBookDTO);
+		AddressBookData addressBookData = this.getAddressBookDataById(id);
+		addressBookData.setFirstName(addressBookDTO.firstName);
+		addressBookData.setLastName(addressBookDTO.lastName);
+		addressBookData.setPhoneNo(addressBookDTO.phoneNo);
+		addressBookList.set(id-1, addressBookData);
 		return addressBookData;
 	}
 
 	@Override
-	public AddressBookData deleteAddressBookData(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteAddressBookData(int id) {
+		addressBookList.remove(id-1);
 	}
 }
