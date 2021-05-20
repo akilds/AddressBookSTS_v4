@@ -3,9 +3,9 @@ package com.example.addressbook.dto;
 public class AddressBookDTO {
 	public String firstName;
 	public String lastName;
-	public long phoneNo;
+	public String phoneNo;
 	
-	public AddressBookDTO(String firstName, String lastName, long phoneNo) {
+	public AddressBookDTO(String firstName, String lastName, String phoneNo) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNo = phoneNo;
