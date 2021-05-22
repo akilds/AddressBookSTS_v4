@@ -3,9 +3,12 @@ package com.example.addressbook.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.addressbook.dto.AddressBookDTO;
 import com.example.addressbook.model.AddressBookData;
 
+@Service
 public class AddressBookService implements IAddressBookService{
 
 	private List<AddressBookData> addressBookList = new ArrayList<>();
