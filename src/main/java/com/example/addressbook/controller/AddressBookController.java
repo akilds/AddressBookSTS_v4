@@ -21,8 +21,11 @@ import com.example.addressbook.dto.ResponseDTO;
 import com.example.addressbook.model.AddressBookData;
 import com.example.addressbook.services.IAddressBookService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/addressbook")
+@Slf4j
 public class AddressBookController {
 	
 	@Autowired
@@ -43,8 +46,17 @@ public class AddressBookController {
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
 	
+	@GetMapping("/city/{city}")
+	public ResponseEntity<ResponseDTO> getAddressBookDataByCity(@PathVariable("city") String city) {
+		List<AddressBookData> empDataList = null;
+		empDataList = addressBookService.getAddressByCity(city);
+		ResponseDTO respDTO = new ResponseDTO("Get Call for ID Successful", empDataList);
+		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+	}
+	
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> addAddressBookData(@Valid @RequestBody AddressBookDTO addressBookDTO) {
+		log.debug("Address Data : " + addressBookDTO.toString());
 		AddressBookData addressBookData = addressBookService.createAddressBookData(addressBookDTO);
 		ResponseDTO respDTO = new ResponseDTO("Created Address Book Data Successfully", addressBookData);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
@@ -64,4 +76,6 @@ public class AddressBookController {
 		ResponseDTO respDTO = new ResponseDTO("Deleted Successfully", "Deleted Id : " + id);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
+	
+	
 }

@@ -8,6 +8,7 @@ import com.example.addressbook.model.AddressBookData;
 public interface IAddressBookService {
 	List<AddressBookData> getAddressBookData();
 	AddressBookData getAddressBookDataById(int id);
+	List<AddressBookData> getAddressByCity(String city);
 	AddressBookData createAddressBookData(AddressBookDTO addressBookDTO);
 	AddressBookData updateAddressBookData(int id, AddressBookDTO addressBookDTO);
 	void deleteAddressBookData(int id);
